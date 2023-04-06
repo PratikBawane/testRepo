@@ -2,16 +2,111 @@
 <html lang="en">
 <head>
     <style>
-    body{
-        background-color: #faf;
-    }
-    </style>
+        body{
+    background-color: skyblue;
+}
+
+.box{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock{
+    position: absolute;
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(150px,#f5e664,#e9c709);
+    z-index: -10;
+    border: 10px solid #e09807;
+    box-shadow: 0 -8px 8px rgba(255,255,255,0.05),
+                inset 0 -8px 8px rgba(255,255,255,0.05),
+                0 8px 8px rgba(0,0,0,0.3),
+                inset 0 8px 8px rgba(0,0,0,0.3);
+    padding: 20px;
+}
+
+.clock: before{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 47%;
+    left: 47%;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 1;
+}
+.clock .hand{
+    position: relative;
+    background-color: #000;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transform-origin: bottom;
+}
+
+#hr{
+    width: 10px;
+    height: 80px;
+    top: 26%;
+    left: 48%;
+}
+#min{
+    width: 7px;
+    height: 110px;
+    top: -5%;
+    left: 49%;
+}
+#sec{
+    width: 4px;
+    height: 140px;
+    top: -45%;
+    left: 49%;
+}
+        </style>
+    <link href='E:\html\testpro\style.css' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>clock</title>
 </head>
 <body>
-    <h1>hello world!</h1>
+    <div class="box">
+        <div class="clock">
+            <div class="hand" id='hr'></div>
+            <div class="hand" id='min'></div>
+            <div class="hand" id='sec'></div>
+            <div class="point"></div>
+        </div>
+        <img src="C:\Users\Pratik\Pictures\Screenshots\clock.png" alt="clock">
+    </div>
+    <script>
+        var hour = document.getElementById('hr');
+var min = document.getElementById('min');
+var sec = document.getElementById('sec');
+
+var timenow = setInterval(time, 1000);
+function time(){
+    var date =  new Date();
+
+    let h = date.getHours();
+    let m = date.getMinutes();
+    let s = date.getSeconds();
+
+    let cal_hr = (h*30) + (m/2);
+    let cal_min = (m*6) + (s/10);
+    let cal_sec = s*6;
+
+    hour.style.transform = 'rotate(' + cal_hr + 'deg)';
+    min.style.transform = 'rotate(' + cal_min + 'deg)';
+    sec.style.transform = 'rotate(' + cal_sec + 'deg)';
+}
+
+time();
+    </script>
 </body>
 </html>
